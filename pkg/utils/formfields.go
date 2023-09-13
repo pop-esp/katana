@@ -30,6 +30,11 @@ func ParseFormFields(document *goquery.Document) []navigation.Form {
 		}
 
 		if action != "" {
+			// Collect form data when action="#..." (the page is the endpoint)
+			if strings.HasPrefix(action, "#") {
+				action = document.Url.String()
+			}
+
 			actionUrl, err := urlutil.ParseURL(action, true)
 			if err != nil {
 				return

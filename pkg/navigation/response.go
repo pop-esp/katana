@@ -44,7 +44,7 @@ type Response struct {
 
 func (n Response) AbsoluteURL(path string) string {
 	if strings.HasPrefix(path, "#") {
-		return ""
+		path = n.Reader.Url.Path
 	}
 
 	absURL, err := n.Resp.Request.URL.Parse(path)
